@@ -1,7 +1,10 @@
 <!--
-title: No id is necessary in the header when writing new articles
-tags:  Qiita-Sync
+title:   No id is necessary in the header when writing new articles
+tags:    Qiita-Sync
+id:      3445d7eadadc35cc6fc6
+private: false
 -->
+
 
 # ServiceNow Instance Localization
 
@@ -53,7 +56,7 @@ PluginのInstall終了後。
 元々のインスタンスは日本時間に設定されていないため、レコードの作成時間などを日本時間で表示するためにはシステムのタイムゾーンを変更する必要があります。
 
     System Properties > Basic Configuration UI16 > 'System time zorn for all users unless overridden in the user's record.' > Configure available time zorn
-    
+
     Available List から Asia/Tokyo を Selected に変更
 
     Save > Asia/Tokyo
@@ -154,7 +157,7 @@ URL：フィールドに関する情報を提供するwebページのURL。URL�
     Plural: プライマリ
     Element: primary
     Language: ja
-    Help: 
+    Help:
     Hint: 住所をアカウントのプライマリとしてマークします。
 
 [公式Docs][FieldLableTableDocs]
