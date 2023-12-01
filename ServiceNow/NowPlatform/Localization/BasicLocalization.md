@@ -1,7 +1,6 @@
 <!--
 title:   ServiceNow Instanceの基本的な日本語化
 tags:    ServiceNow
-id:      3445d7eadadc35cc6fc6
 private: true
 -->
 
