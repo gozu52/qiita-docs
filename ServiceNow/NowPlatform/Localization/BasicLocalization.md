@@ -1,3 +1,8 @@
+<!--
+title: No id is necessary in the header when writing new articles
+tags:  Qiita-Sync
+-->
+
 # ServiceNow Instance Localization
 
 ## 目次
