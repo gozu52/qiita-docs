@@ -1,10 +1,9 @@
 <!--
-title:   No id is necessary in the header when writing new articles
-tags:    Qiita-Sync
+title:   ServiceNow Instanceの基本的な日本語化
+tags:    ServiceNow
 id:      3445d7eadadc35cc6fc6
-private: false
+private: true
 -->
-
 
 # ServiceNow Instance Localization
 
@@ -17,7 +16,7 @@ private: false
 
 ## はじめに
 
-この記事はInstanceを日本語化していく際の情報を
+この記事はInstanceを日本語化した際に得た、個人的な勉強内容をまとめたものです。
 
 公式Document：<https://docs.servicenow.com/en-US/bundle/vancouver-platform-administration/page/administer/core-configuration/concept/p_Localization.html>
 
