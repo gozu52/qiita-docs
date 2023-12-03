@@ -2,7 +2,7 @@
 title:   ServiceNow Instanceの基本的な日本語化
 tags:    ServiceNow
 id:      f1a29730df3f4922fc4f
-private: true
+private: false
 -->
 
 
