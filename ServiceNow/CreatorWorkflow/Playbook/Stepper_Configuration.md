@@ -2,7 +2,7 @@
 title:   ServiceNow Workspaceのカスタマイズ - Stepperの設定方法
 tags:    ServiceNow
 id:      2cab9db63d57ae75c2ce
-private: true
+private: false
 -->
 # Stepperの設定方法
 
