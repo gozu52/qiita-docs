@@ -1,8 +1,8 @@
 <!--
-title:   ServiceNow Instanceの基本的な日本語化
+title:  「申請者による取り戻し」の実装メモ
 tags:    ServiceNow
 id:      
-private: false
+private: true
 -->
 
 # 「申請者による取り戻し」の実装メモ
