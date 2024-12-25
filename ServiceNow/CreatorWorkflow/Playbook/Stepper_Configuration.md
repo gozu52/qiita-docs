@@ -1,9 +1,10 @@
 <!--
 title:   ServiceNow Workspaceのカスタマイズ - Stepperの設定方法
 tags:    ServiceNow
-id:      
+id:      2cab9db63d57ae75c2ce
 private: true
 -->
+
 
 # Stepperの設定方法
 
@@ -23,8 +24,8 @@ private: true
 
 ### 今回作成したPlaybook
 
-利用するPlaybookはこちらです。  
-今回は中身は利用せず、LaneとActivityの名前を利用するため枠のみ作成しています。  
+利用するPlaybookはこちらです。
+今回は中身は利用せず、LaneとActivityの名前を利用するため枠のみ作成しています。
 
 #### 開発画面
 
@@ -38,14 +39,14 @@ private: true
 
 ### Stepperの追加
 
-まず、Stepperを追加したいレコード画面をUI Builderでひらきます。  
-Bodyの右側にある縦の３点リーダから**Add Content**を選択しStepperコンポーネントを追加していきます。  
+まず、Stepperを追加したいレコード画面をUI Builderでひらきます。
+Bodyの右側にある縦の３点リーダから**Add Content**を選択しStepperコンポーネントを追加していきます。
 
 ![alt text](./images/stepper_uib_addcontent.png)
 ![alt text](./images/stepper_uib_stepper.png)
 
-Stepperを追加した後、コンポーネントをクリックすることでStepperの編集が可能です。  
-プリセットを利用することで、素早くPlaybookの内容を反映できるようになっています。  
+Stepperを追加した後、コンポーネントをクリックすることでStepperの編集が可能です。
+プリセットを利用することで、素早くPlaybookの内容を反映できるようになっています。
 
 ![alt text](./images/stepper_uib_preset.png)
 
@@ -55,16 +56,16 @@ Stepperを追加した後、コンポーネントをクリックすることでS
 
 ### Steperの編集
 
-しかしながら、現実にはステータスとしてLaneの値をトラッキングしたいことの方が多いかと思います。  
-今回はここからスクリプトの中身Laneの値を表示させるように変更を加えていきます。  
+しかしながら、現実にはステータスとしてLaneの値をトラッキングしたいことの方が多いかと思います。
+今回はここからスクリプトの中身Laneの値を表示させるように変更を加えていきます。
 
-スクリプトを変更していく際に、それぞれのアイテムが持つデータ構成については下記手順を進めていただくことで、JSON形式で確認できます。  
+スクリプトを変更していく際に、それぞれのアイテムが持つデータ構成については下記手順を進めていただくことで、JSON形式で確認できます。
 
 ![alt text](./images/stepper_uib_binddata.png)
 ![alt text](./images/stepper_uib_scriptmodal.png)
 ![alt text](./images/stepper_uib_jsondata.png)
 
-上記から抜き出したいLanesの構成を確認し、スクリプトに適用していきます。  
+上記から抜き出したいLanesの構成を確認し、スクリプトに適用していきます。
 
 ``` diff_javascript
 /**
@@ -104,7 +105,7 @@ function evaluateProperty({ api }) {
 	};
 	const lanes = playbooksByContextId[selectedItem.playbookContextId].lanes;
 	const flattenedActivities = [];
-    
+
 +    for(var i=0;i<lanes.length;i++){
 +        flattenedActivities.push({
 +            id: lanes[i].contextId,
@@ -151,8 +152,8 @@ function evaluateProperty({ api }) {
 
 ### Stepper - 完了数
 
-Stepperの下部に完了の数が表示されているかと思います。  
-こちらは今回の手順の中では記載しておりませんが、クリック一つで表示可能です。  
+Stepperの下部に完了の数が表示されているかと思います。
+こちらは今回の手順の中では記載しておりませんが、クリック一つで表示可能です。
 
 Stepperの編集画面下部の**Show completed count**をTrueに変えてあげることで実現できます。
 
