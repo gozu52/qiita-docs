@@ -1,10 +1,9 @@
 <!--
-title:   「申請者による取り戻し」の実装メモ
+title:   ServiceNow Instanceの基本的な日本語化
 tags:    ServiceNow
-id:      204e4c4230189a67d18c
+id:      
 private: false
 -->
-
 
 # 「申請者による取り戻し」の実装メモ
 
@@ -20,7 +19,7 @@ private: false
 
 ## 構築情報
 
-- 事前設定項目
+- 事前設定
   - [Standard Ticket Header]Widgetのクローン
   - My Request Filterでポータルページの設定
 
