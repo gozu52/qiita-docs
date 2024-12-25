@@ -4,8 +4,6 @@ tags:    ServiceNow
 id:      2cab9db63d57ae75c2ce
 private: true
 -->
-
-
 # Stepperの設定方法
 
 ## memo
@@ -29,11 +27,11 @@ private: true
 
 #### 開発画面
 
-![alt text](./images/stepper_playbook_dev.png)
+![alt text](images/stepper_playbook_dev.png)
 
 #### レコード画面
 
-![alt text](./images/stepper_playbook_record.png)
+![alt text](images/stepper_playbook_record.png)
 
 ## Steperの追加・編集
 
@@ -42,17 +40,17 @@ private: true
 まず、Stepperを追加したいレコード画面をUI Builderでひらきます。
 Bodyの右側にある縦の３点リーダから**Add Content**を選択しStepperコンポーネントを追加していきます。
 
-![alt text](./images/stepper_uib_addcontent.png)
-![alt text](./images/stepper_uib_stepper.png)
+![alt text](images/stepper_uib_addcontent.png)
+![alt text](images/stepper_uib_stepper.png)
 
 Stepperを追加した後、コンポーネントをクリックすることでStepperの編集が可能です。
 プリセットを利用することで、素早くPlaybookの内容を反映できるようになっています。
 
-![alt text](./images/stepper_uib_preset.png)
+![alt text](images/stepper_uib_preset.png)
 
 デフォルトでは画面のように、Playbookに存在するすべてのActivityがStepperに表示されるようなスクリプトが適用されています。
 
-![alt text](./images/stepper_ws_default.png)
+![alt text](images/stepper_ws_default.png)
 
 ### Steperの編集
 
@@ -61,9 +59,9 @@ Stepperを追加した後、コンポーネントをクリックすることでS
 
 スクリプトを変更していく際に、それぞれのアイテムが持つデータ構成については下記手順を進めていただくことで、JSON形式で確認できます。
 
-![alt text](./images/stepper_uib_binddata.png)
-![alt text](./images/stepper_uib_scriptmodal.png)
-![alt text](./images/stepper_uib_jsondata.png)
+![alt text](images/stepper_uib_binddata.png)
+![alt text](images/stepper_uib_scriptmodal.png)
+![alt text](images/stepper_uib_jsondata.png)
 
 上記から抜き出したいLanesの構成を確認し、スクリプトに適用していきます。
 
@@ -133,7 +131,7 @@ function evaluateProperty({ api }) {
 
 上記スクリプトを適用することでLaneの値をStepperに表示させることができました。
 
-![alt text](./images/stepper_ws_laneinfo.png)
+![alt text](images/stepper_ws_laneinfo.png)
 
 ## Tips
 
@@ -148,7 +146,7 @@ function evaluateProperty({ api }) {
 - UI Builderで画面中央に実レコード画面を出力するにはテスト値を入力する必要があります。
 - 画面左上部で設定可能です。
 
-![alt text](./images/stepper_uib_testval.png)
+![alt text](images/stepper_uib_testval.png)
 
 ### Stepper - 完了数
 
@@ -157,5 +155,5 @@ Stepperの下部に完了の数が表示されているかと思います。
 
 Stepperの編集画面下部の**Show completed count**をTrueに変えてあげることで実現できます。
 
-![alt text](./images/stepper_uib_cmpcnt.png)
-![alt text](./images/stepper_ws_comcnt.png)
+![alt text](images/stepper_uib_cmpcnt.png)
+![alt text](images/stepper_ws_comcnt.png)
