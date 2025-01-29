@@ -1,8 +1,11 @@
-# 代理承認
+<!--
+title:   ServiceNowにおける代理人機能の動作について
+tags:    ServiceNow
+id:      
+private: true
+-->
 
-**png identifer**  
-delegated-wf_
-./images/delegated-wf_
+# 代理承認
 
 ## 代理承認の実現
 
