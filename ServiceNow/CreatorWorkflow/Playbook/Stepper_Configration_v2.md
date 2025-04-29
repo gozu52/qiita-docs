@@ -129,11 +129,12 @@ function evaluateProperty({ api }) {
 	return flattenedActivities;
 }
 ```
+
 ## Stepper適用後
 
 - 上記設定が完了すると、Playbookのステージごとの進捗をStepperとして表示でき、それぞれのステージの進捗状況についても視認できるようになります。
 
-![alt text](images/_stepper_yokohama_image-10.png)
+![alt text](images/stepper_yokohama_image-10.png)
 
 ## Appendix - Playbook表示位置の変更
 
