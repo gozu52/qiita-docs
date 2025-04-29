@@ -1,9 +1,10 @@
 <!--
 title:   ServiceNow Workspaceのカスタマイズ - Stepperの設定方法 Yokohama以降
 tags:    ServiceNow
-id:      
+id:      912f733aa1057f0a1937
 private: true
 -->
+
 # Stepperの設定方法
 
 ## 前提
