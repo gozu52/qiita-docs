@@ -1,9 +1,10 @@
 <!--
 title:   ServiceNow Record Producer上でのExcel取り込み - Widget
 tags:    ServiceNow
-id:      
+id:      45f43b67b358293dbc37
 private: true
 -->
+
 
 # 【ServiceNow】Record ProducerでExcelファイルのMRVS取込メモ
 
@@ -71,10 +72,10 @@ Variable Setを作成し、以下の変数を定義します。
 ```html
 <div>
     <div>
-        <input ng-click="c.importExcel()" 
+        <input ng-click="c.importExcel()"
                ng-disabled="c.loading"
-               type="button" 
-               value="{{c.loading ? '処理中...' : 'Excelから取り込み'}}" 
+               type="button"
+               value="{{c.loading ? '処理中...' : 'Excelから取り込み'}}"
                class="btn btn-primary" />
         <span ng-if="c.message" style="margin-left: 10px;">{{c.message}}</span>
     </div>
@@ -86,13 +87,13 @@ Variable Setを作成し、以下の変数を定義します。
 ```javascript
 api.controller = function($scope) {
     var c = this;
-    
+
     c.loading = false;
     c.message = '';
-    
+
     // MRVS変数名
     var mrvsVarName = 'excel_mrvs';
-    
+
     // ExcelキーをMRVS変数名にマッピング
     var mapping = {
         'item': 'u_mrvs_item',
@@ -101,42 +102,42 @@ api.controller = function($scope) {
         'remarks': 'u_mrvs_remarks',
         'total': 'u_mrvs_total'
     };
-    
+
     // Excelインポート処理
     c.importExcel = function() {
         console.log('=== Excel import started ===');
         c.loading = true;
         c.message = '';
-        
+
         var cartID = getCartID();
-        
+
         if (!cartID) {
             c.loading = false;
             c.message = 'カートIDが取得できません';
             return;
         }
-        
+
         // Widget Server Script経由で処理
         c.data.action = 'importExcel';
         c.data.cartID = cartID;
-        
+
         c.server.update().then(function(response) {
             c.loading = false;
             c.data.action = '';
-            
+
             // レスポンスからresultを取得
             var result = null;
             if (response && response.result) {
                 result = response.result;
             }
-            
+
             if (result && result.success && result.data && result.data.length > 0) {
                 // データをMRVS形式に変換
                 var mrvsData = [];
                 for (var i = 0; i < result.data.length; i++) {
                     var row = result.data[i];
                     var mrvsRow = {};
-                    
+
                     for (var excelKey in mapping) {
                         if (row.hasOwnProperty(excelKey)) {
                             mrvsRow[mapping[excelKey]] = row[excelKey];
@@ -144,17 +145,17 @@ api.controller = function($scope) {
                     }
                     mrvsData.push(mrvsRow);
                 }
-                
+
                 // MRVSにデータを設定
                 if ($scope.page && $scope.page.g_form) {
                     var jsonDataString = JSON.stringify(mrvsData);
                     $scope.page.g_form.setValue(mrvsVarName, jsonDataString);
-                    
+
                     // 合計金額を外部フィールドに設定
                     if (result.grandTotal !== undefined) {
                         $scope.page.g_form.setValue('u_total_costs', String(result.grandTotal));
                     }
-                    
+
                     c.message = result.message;
                 }
             } else {
@@ -162,12 +163,12 @@ api.controller = function($scope) {
             }
         });
     };
-    
+
     // カートIDを取得
     function getCartID() {
         return getTableIdOrParentScope($scope);
     }
-    
+
     function getTableIdOrParentScope(scope) {
         if (typeof scope.attachmentHandler !== 'undefined') {
             return scope.attachmentHandler.tableId;
@@ -184,12 +185,12 @@ api.controller = function($scope) {
 
 ```javascript
 (function($sp, data, input) {
-    
+
     if (input && input.action === 'importExcel') {
         var cartID = input.cartID;
         data.result = parseExcelData(cartID);
     }
-    
+
     // Excel解析処理
     function parseExcelData(cartID) {
         var result = {
@@ -199,15 +200,15 @@ api.controller = function($scope) {
             grandTotal: 0,
             message: ''
         };
-        
+
         try {
             var attachment = getExcelAttachment(cartID);
-            
+
             if (!attachment) {
                 result.message = 'Excelファイルが添付されていません';
                 return result;
             }
-            
+
             // 添付ファイル情報をresultに含める
             result.attachment = {
                 fileName: attachment.file_name,
@@ -215,27 +216,27 @@ api.controller = function($scope) {
                 tableName: attachment.table_name,
                 searchMethod: attachment.search_method
             };
-            
+
             // GlideExcelParserで解析
             var parser = new sn_impex.GlideExcelParser();
             var gsa = new GlideSysAttachment();
             var attachmentStream = gsa.getContentStream(attachment.sys_id);
-            
+
             parser.parse(attachmentStream);
-            
+
             var sheetNames = parser.getSheetNames();
             if (sheetNames && sheetNames.length > 0) {
                 parser.setSheetName(sheetNames[0]);
             }
-            
+
             var headers = [];
             var rows = [];
             var isFirstDataRow = true;
             var grandTotal = 0;
-            
+
             while (parser.next()) {
                 var row = parser.getRow();
-                
+
                 if (isFirstDataRow) {
                     for (var key in row) {
                         if (row.hasOwnProperty(key)) {
@@ -244,68 +245,68 @@ api.controller = function($scope) {
                     }
                     isFirstDataRow = false;
                 }
-                
+
                 var rowData = {};
                 var hasData = false;
-                
+
                 for (var h = 0; h < headers.length; h++) {
                     var headerKey = headers[h];
                     var cellValue = row[headerKey];
                     var sanitizedKey = sanitizeHeader(headerKey);
-                    
-                    cellValue = (cellValue !== null && cellValue !== undefined) 
+
+                    cellValue = (cellValue !== null && cellValue !== undefined)
                         ? String(cellValue).trim() : '';
                     rowData[sanitizedKey] = cellValue;
-                    
+
                     if (cellValue) hasData = true;
                 }
-                
+
                 // 総額を計算（quantity * unit_price）
                 var quantity = parseFloat(rowData['quantity']) || 0;
                 var unitPrice = parseFloat(rowData['unit_price']) || 0;
                 var total = quantity * unitPrice;
                 rowData['total'] = String(total);
                 grandTotal += total;
-                
+
                 if (hasData) {
                     rows.push(rowData);
                 }
             }
-            
+
             var sanitizedHeaders = headers.map(function(h) {
                 return sanitizeHeader(h);
             });
-            
+
             result.success = true;
             result.data = rows;
             result.headers = sanitizedHeaders;
             result.grandTotal = grandTotal;
             result.message = rows.length + '件のデータを読み込みました';
-            
+
         } catch (e) {
             result.message = 'Excel解析エラー: ' + e.message;
         }
-        
+
         return result;
     }
-    
+
     // Excel添付ファイルを取得
     function getExcelAttachment(cartID) {
         var tableNames = ['sc_cart_item', 'sp_portal', 'sc_req_item', 'sc_request'];
-        
+
         for (var t = 0; t < tableNames.length; t++) {
             var tableName = tableNames[t];
             var gr = new GlideRecord('sys_attachment');
             gr.addQuery('table_name', tableName);
             gr.addQuery('table_sys_id', cartID);
-            
+
             var qc = gr.addQuery('file_name', 'ENDSWITH', '.xlsx');
             qc.addOrCondition('file_name', 'ENDSWITH', '.xls');
-            
+
             gr.orderByDesc('sys_created_on');
             gr.setLimit(1);
             gr.query();
-            
+
             if (gr.next()) {
                 return {
                     sys_id: gr.getUniqueValue(),
@@ -315,7 +316,7 @@ api.controller = function($scope) {
                 };
             }
         }
-        
+
         // フォールバック: ユーザーの最新Excel添付を検索
         var grAny = new GlideRecord('sys_attachment');
         var qcAny = grAny.addQuery('file_name', 'ENDSWITH', '.xlsx');
@@ -324,7 +325,7 @@ api.controller = function($scope) {
         grAny.orderByDesc('sys_created_on');
         grAny.setLimit(1);
         grAny.query();
-        
+
         if (grAny.next()) {
             return {
                 sys_id: grAny.getUniqueValue(),
@@ -333,16 +334,16 @@ api.controller = function($scope) {
                 search_method: 'fallback_user_latest'
             };
         }
-        
+
         return null;
     }
-    
+
     // ヘッダ名をサニタイズ
     function sanitizeHeader(header) {
         if (!header) return 'column_' + Math.floor(Math.random() * 10000);
         return String(header).trim().toLowerCase().replace(/\s+/g, '_');
     }
-    
+
 })($sp, data, input);
 ```
 
