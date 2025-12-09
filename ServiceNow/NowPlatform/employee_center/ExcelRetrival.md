@@ -1,12 +1,12 @@
 <!--
-title:   ServiceNow Record Producer上でのExcel取り込み - Widget
+title:   【ServiceNow】 Record Producer上でのExcel取り込み - Widget
 tags:    ServiceNow
 id:      45f43b67b358293dbc37
 private: true
 -->
 
 
-# 【ServiceNow】Record ProducerでExcelファイルのMRVS取込メモ
+# 【ServiceNow】 Record ProducerでExcelファイルのMRVS取込メモ
 
 ## はじめに
 
